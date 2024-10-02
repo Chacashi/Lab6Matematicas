@@ -51,10 +51,10 @@ namespace Mathematics.Week6
 
             //multiplicación y -> x -> z
             r = qy * qx * qz;
-
+            UpdatePosition();
             transform.rotation = r;
 
-            UpdatePosition();
+          
         }
 
         
@@ -70,28 +70,6 @@ namespace Mathematics.Week6
         {
             _rollDirection = context.ReadValue<float>();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -121,7 +99,16 @@ namespace Mathematics.Week6
 
         private void UpdatePosition()
         {
-            _myRB.velocity = new Vector3(-_horizontalDirection * velocitySpeed, -_verticalDirection * velocitySpeed, 0f);
+            if (_verticalDirection == 0 && _horizontalDirection == 0)
+            {
+                _myRB.velocity = Vector3.zero;
+                r = Quaternion.Slerp(transform.rotation, Quaternion.identity, Time.fixedDeltaTime * 1.5f);
+            }
+            else
+            {
+                _myRB.velocity = new Vector3(-_horizontalDirection * velocitySpeed, -_verticalDirection * velocitySpeed, 0f);
+            }
+            
         }
     }
 
