@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text lifeText;
     public TMP_Text timerText;
     public float currentTime;
+    public int CurrentLife { get;set; }
 
     private void Update()
     {
